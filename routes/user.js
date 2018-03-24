@@ -3,9 +3,11 @@ const express = require('express');
 const app = express.Router();
 const User = require('../models/users');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
 app.post('/register',(req,res)=>{
-	
+
 	bcrypt.hash(req.body.password, 10, function(err, hash) {
 
 		if(err){
@@ -45,6 +47,53 @@ app.post('/register',(req,res)=>{
 			})
 		}	
 	});
+})
+
+app.post('/authenticate',(req,res)=>{
+
+	User.findOne({email:req.body.email},(err,user)=>{
+
+		if(err){
+			res.json({
+					error:err
+			})
+		}
+		else{
+				bcrypt.compare(req.body.password, user.password, (err, result) => {
+
+					if(result == true){
+
+						const new_user = {
+							email:user.email,
+							password:user.password
+						}
+
+						jwt.sign(new_user,config.secretKey, {expiresIn : 60*60*24},(err,token)=>{
+
+							if(err){
+								res.json({
+									error:err
+								})
+							}
+							else{
+								res.json({
+									authenticate:true,
+									token:token
+								})
+							}
+
+						});
+								
+					}
+					else
+					{
+							res.json({
+								error:"Incorrect Password"
+							})
+					}
+			});
+		}
+	})
 })
 
 
