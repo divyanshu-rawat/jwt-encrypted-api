@@ -14,7 +14,8 @@ const router = express.Router();
 const user = require('./routes/user');
 const greeting = require('./routes/greeting');
 const post = require('./routes/post');
-const jokes = require('./routes/jokes');
+const food_jokes = require('./routes/food_jokes_route');
+const celebrity_jokes = require('./routes/celebrity_jokes_route');
 
 
 
@@ -24,8 +25,7 @@ app.use(bodyParser.json());
 // using morgan to log requests to the console
 app.use(morgan('dev'));
 
-app.use('/', greeting);
-app.use('/api/food', jokes);
+app.use('/api', greeting);
 app.use('/api/user', user);
 
 app.use((req,res,next) => {
@@ -50,10 +50,8 @@ app.use((req,res,next) => {
 	}
 })
 
-
-
-
-app.use('/posts', post);
+app.use('/api/jokes', food_jokes);
+app.use('/api/jokes', celebrity_jokes);
 
 mongoose.connect(config.mongoUrl);
 var db = mongoose.connection;
@@ -63,10 +61,6 @@ db.once('open', function () {
     console.log("Connected correctly to server");
 
 });
-
-
-
-
 
 
 app.listen(4000,()=> {
