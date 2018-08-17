@@ -29,9 +29,9 @@ app.use('/api', greeting);
 app.use('/api/user', user);
 
 app.use('/api/jokes', food_jokes);
-app.use('/api/jokes', celebrity_jokes);
 
-/*
+
+
 app.use((req,res,next) => {
 	
 	const token = req.body.token || req.query.token || req.headers['access-token'];
@@ -52,8 +52,10 @@ app.use((req,res,next) => {
 	        message: 'No token provided.' 
 	    });
 	}
-})
-*/
+});
+
+app.use('/api/jokes', celebrity_jokes);
+
 
 
 mongoose.connect(config.mongoUrl);
