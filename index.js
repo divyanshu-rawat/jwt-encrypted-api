@@ -14,6 +14,7 @@ const router = express.Router();
 const user = require('./routes/user');
 const greeting = require('./routes/greeting');
 const post = require('./routes/post');
+const jokes = require('./routes/jokes');
 
 
 
@@ -24,7 +25,8 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 app.use('/', greeting);
-app.use('/user', user);
+app.use('/api/food', jokes);
+app.use('/api/user', user);
 
 app.use((req,res,next) => {
 	

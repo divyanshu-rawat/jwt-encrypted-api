@@ -5,7 +5,7 @@ var app = express.Router();
 
 app.get('/', (req,res) => {
 	res.send({
-		message:'Welcome'
+		Message:'Welcome Abroad :)'
 	})
 })
 
