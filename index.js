@@ -13,7 +13,7 @@ const router = express.Router();
 
 const user = require('./routes/user');
 const greeting = require('./routes/greeting');
-const post = require('./routes/post');
+
 const food_jokes = require('./routes/food_jokes_route');
 const celebrity_jokes = require('./routes/celebrity_jokes_route');
 
