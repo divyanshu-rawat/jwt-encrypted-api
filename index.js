@@ -10,7 +10,7 @@ const User = require('./models/users');
 const config = require('./config');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-
+const port = process.env.PORT || 4000;
 const user = require('./routes/user');
 const greeting = require('./routes/greeting');
 
@@ -63,6 +63,6 @@ db.once('open', function () {
 });
 
 
-app.listen(4000,()=> {
+app.listen(port,()=> {
 	console.log('Server Started');
 })
