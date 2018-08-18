@@ -29,6 +29,7 @@ app.post('/register',(req,res)=>{
 				else{
 
 					const user = new User({
+						username:req.body.username,
 						email:req.body.email,
 						password: hash
 					})
@@ -77,6 +78,7 @@ app.post('/authenticate',(req,res)=>{
 							}
 							else{
 								res.json({
+									user:user,
 									authenticate:true,
 									token:token
 								})
