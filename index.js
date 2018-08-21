@@ -14,6 +14,7 @@ const port = process.env.PORT || 4000;
 const user = require('./routes/user');
 const greeting = require('./routes/greeting');
 
+const cors = require('cors');
 const food_jokes = require('./routes/food_jokes_route');
 const celebrity_jokes = require('./routes/celebrity_jokes_route');
 
@@ -24,6 +25,9 @@ app.use(bodyParser.json());
 
 // using morgan to log requests to the console
 app.use(morgan('dev'));
+
+
+app.use(cors());
 
 app.use('/api', greeting);
 app.use('/api/user', user);
@@ -63,7 +67,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
 
-    console.log("Connected correctly to server");
+    console.log("CORS-enabled web server correctly connected!");
 
 });
 
